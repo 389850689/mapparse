@@ -32,8 +32,8 @@ pub struct Rva(usize);
 
 #[derive(Debug)]
 pub struct Address {
-    seg: u16,
-    addr: usize,
+    pub seg: u16,
+    pub addr: usize,
 }
 
 #[derive(Debug)]
