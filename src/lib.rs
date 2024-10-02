@@ -27,33 +27,33 @@ use msvc_demangler::{CallingConv, StorageClass, Type};
 //
 // <seg>:<addr>		<symbol>	<rva>	<flags>	<obj>
 
-struct Rva(usize);
+pub struct Rva(usize);
 
-struct Address {
+pub struct Address {
     seg: u16,
     addr: usize,
 }
 
 #[derive(Debug)]
-enum Class {
+pub enum Class {
     Code,
     Data,
 }
 
-struct Section<'a> {
-    name: &'a str,
-    class: Class,
-    addr: Address,
-    len: usize,
+pub struct Section<'a> {
+    pub name: &'a str,
+    pub class: Class,
+    pub addr: Address,
+    pub len: usize,
 }
 
 #[derive(Debug)]
-enum LibObject<'a> {
+pub enum LibObject<'a> {
     LibObj(Option<&'a str>, &'a str),
     Absolute,
 }
 
-struct Function<'a> {
+pub struct Function<'a> {
     pub symbol: &'a str,
     pub addr: Address,
     pub rva: Rva,
@@ -61,7 +61,7 @@ struct Function<'a> {
     pub libobj: LibObject<'a>,
 }
 
-struct StaticSymbol<'a> {
+pub struct StaticSymbol<'a> {
     pub symbol: &'a str,
     pub addr: Address,
     pub rva: Rva,
@@ -69,7 +69,7 @@ struct StaticSymbol<'a> {
     pub libobj: LibObject<'a>,
 }
 
-struct MapFile<'a> {
+pub struct MapFile<'a> {
     pub file_name: &'a str,
     pub entrypoint: Address,
     pub preferred_load_addr: usize,
@@ -80,7 +80,7 @@ struct MapFile<'a> {
 }
 
 impl<'a> MapFile<'a> {
-    fn load(input: &'a str) -> Result<Self> {
+    pub fn load(input: &'a str) -> Result<Self> {
         #[derive(Debug)]
         enum Stage {
             Header,
