@@ -28,7 +28,7 @@ use msvc_demangler::{CallingConv, StorageClass, Type};
 // <seg>:<addr>		<symbol>	<rva>	<flags>	<obj>
 
 #[derive(Debug)]
-pub struct Rva(usize);
+pub struct Rva(pub usize);
 
 #[derive(Debug)]
 pub struct Address {
