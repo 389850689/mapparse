@@ -27,8 +27,10 @@ use msvc_demangler::{CallingConv, StorageClass, Type};
 //
 // <seg>:<addr>		<symbol>	<rva>	<flags>	<obj>
 
+#[derive(Debug)]
 pub struct Rva(usize);
 
+#[derive(Debug)]
 pub struct Address {
     seg: u16,
     addr: usize,
@@ -53,6 +55,7 @@ pub enum LibObject<'a> {
     Absolute,
 }
 
+#[derive(Debug)]
 pub struct Function<'a> {
     pub symbol: &'a str,
     pub addr: Address,
@@ -284,7 +287,18 @@ impl<'a> MapFile<'a> {
                                 let val = if rva_with_base == 0 {
                                     0
                                 } else {
-                                    rva_with_base - load_address.unwrap()
+                                    println!(
+                                        "{:X?} - {:X?} ({})",
+                                        rva_with_base,
+                                        load_address.unwrap(),
+                                        substring
+                                    );
+
+                                    if load_address.unwrap() > rva_with_base {
+                                        rva_with_base
+                                    } else {
+                                        rva_with_base - load_address.unwrap()
+                                    }
                                 };
 
                                 rva = Some(Rva(val));
