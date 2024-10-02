@@ -287,13 +287,6 @@ impl<'a> MapFile<'a> {
                                 let val = if rva_with_base == 0 {
                                     0
                                 } else {
-                                    println!(
-                                        "{:X?} - {:X?} ({})",
-                                        rva_with_base,
-                                        load_address.unwrap(),
-                                        substring
-                                    );
-
                                     if load_address.unwrap() > rva_with_base {
                                         rva_with_base
                                     } else {
